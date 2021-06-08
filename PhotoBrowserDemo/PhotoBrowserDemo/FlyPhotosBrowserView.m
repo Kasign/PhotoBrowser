@@ -55,7 +55,7 @@
     return self;
 }
 
--(void)resetAllData{
+- (void)resetAllData {
     _bottomScrollView = nil;
     _bottomLabel = nil;
     _imageview = nil;
@@ -124,7 +124,8 @@
     [self addSubview:_bottomLabel];
 }
 
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+#pragma mark - ScrollView Delegate
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     
     NSInteger page = scrollView.contentOffset.x/FLY_SCREEN_WIDTH;
     NSString* string = [NSString stringWithFormat:@"%ld/%ld",page+1,_imageArray.count];
@@ -133,14 +134,13 @@
     _bottomLabel.attributedText = attriString;
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
     NSInteger page = scrollView.contentOffset.x/FLY_SCREEN_WIDTH;
     NSString* string = [NSString stringWithFormat:@"%ld/%ld",page+1,_imageArray.count];
     NSMutableAttributedString *attriString = [[NSMutableAttributedString alloc]initWithString:string];
     [attriString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 1)];
     _bottomLabel.attributedText = attriString;
-    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -169,7 +169,17 @@
     }
 }
 
+#pragma mark - ZoomView Delegate
+- (BOOL)zoomView:(FlyZoomView *)zoomView shouldRespondsSingleTap:(UITapGestureRecognizer *)gesture {
+    
+    if (zoomView.zoomScrollView.zoomScale == zoomView.minScale) {
+        [self comeBackOnclick];
+        return NO;
+    }
+    return YES;
+}
 
+#pragma mark - Public
 - (void)showPhotosWithOriginalFrame:(CGRect)originalFrame
                              image:(UIImage *)image
                     countEveryLine:(NSInteger)count
@@ -240,6 +250,7 @@
     [self viewDidAppear];
 }
 
+#pragma mark - Animation
 - (void)enlagerWithAnimationZero {
     
     _imageview.bounds = CGRectMake(0, 0, _bigSize.width, _bigSize.height);
@@ -259,7 +270,7 @@
     }];
 }
 
--(void)enlagerWithAnimationOne{
+- (void)enlagerWithAnimationOne {
     
     _imageview.clipsToBounds = YES;
     
@@ -276,15 +287,6 @@
     }];
 }
 
-- (BOOL)zoomView:(FlyZoomView *)zoomView shouldRespondsSingleTap:(UITapGestureRecognizer *)gesture {
-    
-    if (zoomView.zoomScrollView.zoomScale == zoomView.minScale) {
-        [self comeBackOnclick];
-        return NO;
-    }
-    return YES;
-}
-
 //从放大回到原来位置
 - (void)comeBackOnclick {
     
@@ -295,7 +297,7 @@
     }
 }
 
--(void)recoverBackToOriginalPositionWithAnimationZero {
+- (void)recoverBackToOriginalPositionWithAnimationZero {
     
     [_imageview setHidden:NO];
     [_bottomScrollView setHidden:YES];
@@ -316,22 +318,21 @@
     }];
 }
 
--(void)recoverBackToOriginalPosition{
+- (void)recoverBackToOriginalPosition {
     
     [UIView animateWithDuration:FLY_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         if (_wframe.size.width != 0) {
             _imageview.frame = _wframe;
-        }else{
+        } else {
             _imageview.frame = _zframe;
         }
-        
     } completion:^(BOOL finished) {
         [self dissMiss];
     }];
 }
 
 //从放大回到原来位置
--(void)recoverBackToOriginalPositionWithAnimationOne {
+- (void)recoverBackToOriginalPositionWithAnimationOne {
     
     [_bottomScrollView setHidden:YES];
     [_imageview setHidden:NO];
@@ -360,7 +361,7 @@
     }];
 }
 
--(void)dissMiss {
+- (void)dissMiss {
     
     for (UIView *view in _bottomScrollView.subviews) {
         [view removeFromSuperview];
