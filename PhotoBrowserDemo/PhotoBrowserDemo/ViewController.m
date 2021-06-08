@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    _array = [NSArray arrayWithObjects:[UIImage imageNamed:@"0.jpg"],[UIImage imageNamed:@"1.jpg"],[UIImage imageNamed:@"2.jpg"],[UIImage imageNamed:@"3.jpg"],[UIImage imageNamed:@"4.jpg"],[UIImage imageNamed:@"5.png"], nil];
+    _array = [NSArray arrayWithObjects:[UIImage imageNamed:@"0.jpg"],[UIImage imageNamed:@"1.jpg"],[UIImage imageNamed:@"2.jpg"],[UIImage imageNamed:@"3.jpeg"],[UIImage imageNamed:@"4.jpeg"],[UIImage imageNamed:@"5.jpeg"], nil];
     
     _mutableArray = [NSMutableArray array];
     

@@ -15,14 +15,14 @@
 		395594331E665C8F00B88153 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 395594311E665C8F00B88153 /* LaunchScreen.storyboard */; };
 		3955943E1E665C9000B88153 /* PhotoBrowserDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3955943D1E665C9000B88153 /* PhotoBrowserDemoTests.m */; };
 		395594491E665C9000B88153 /* PhotoBrowserDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 395594481E665C9000B88153 /* PhotoBrowserDemoUITests.m */; };
-		3955945C1E665CC000B88153 /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 395594561E665CC000B88153 /* 0.jpg */; };
-		3955945D1E665CC000B88153 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 395594571E665CC000B88153 /* 1.jpg */; };
-		3955945E1E665CC000B88153 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 395594581E665CC000B88153 /* 2.jpg */; };
-		3955945F1E665CC000B88153 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 395594591E665CC000B88153 /* 3.jpg */; };
-		395594601E665CC000B88153 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3955945A1E665CC000B88153 /* 4.jpg */; };
-		395594611E665CC000B88153 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3955945B1E665CC000B88153 /* 5.png */; };
-		395594661E665CD000B88153 /* FlyPhotoEnlargeToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 395594631E665CD000B88153 /* FlyPhotoEnlargeToolView.m */; };
 		395594671E665CD000B88153 /* FlyPhotosBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 395594651E665CD000B88153 /* FlyPhotosBrowserView.m */; };
+		39BBBB51266F9BAF003D41EA /* FlyZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BBBB50266F9BAF003D41EA /* FlyZoomView.m */; };
+		39BBBB5B266F9BD7003D41EA /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 39BBBB52266F9BD7003D41EA /* 2.jpg */; };
+		39BBBB5C266F9BD7003D41EA /* 3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 39BBBB53266F9BD7003D41EA /* 3.jpeg */; };
+		39BBBB5E266F9BD7003D41EA /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 39BBBB55266F9BD7003D41EA /* 0.jpg */; };
+		39BBBB5F266F9BD7003D41EA /* 5.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 39BBBB56266F9BD7003D41EA /* 5.jpeg */; };
+		39BBBB60266F9BD7003D41EA /* 4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 39BBBB57266F9BD7003D41EA /* 4.jpeg */; };
+		39BBBB62266F9BD7003D41EA /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 39BBBB59266F9BD7003D41EA /* 1.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,16 +59,16 @@
 		395594441E665C9000B88153 /* PhotoBrowserDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoBrowserDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		395594481E665C9000B88153 /* PhotoBrowserDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserDemoUITests.m; sourceTree = "<group>"; };
 		3955944A1E665C9000B88153 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		395594561E665CC000B88153 /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
-		395594571E665CC000B88153 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
-		395594581E665CC000B88153 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
-		395594591E665CC000B88153 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
-		3955945A1E665CC000B88153 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
-		3955945B1E665CC000B88153 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
-		395594621E665CD000B88153 /* FlyPhotoEnlargeToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyPhotoEnlargeToolView.h; sourceTree = "<group>"; };
-		395594631E665CD000B88153 /* FlyPhotoEnlargeToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyPhotoEnlargeToolView.m; sourceTree = "<group>"; };
 		395594641E665CD000B88153 /* FlyPhotosBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyPhotosBrowserView.h; sourceTree = "<group>"; };
 		395594651E665CD000B88153 /* FlyPhotosBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyPhotosBrowserView.m; sourceTree = "<group>"; };
+		39BBBB4F266F9BAF003D41EA /* FlyZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyZoomView.h; sourceTree = "<group>"; };
+		39BBBB50266F9BAF003D41EA /* FlyZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyZoomView.m; sourceTree = "<group>"; };
+		39BBBB52266F9BD7003D41EA /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
+		39BBBB53266F9BD7003D41EA /* 3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpeg; sourceTree = "<group>"; };
+		39BBBB55266F9BD7003D41EA /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
+		39BBBB56266F9BD7003D41EA /* 5.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 5.jpeg; sourceTree = "<group>"; };
+		39BBBB57266F9BD7003D41EA /* 4.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpeg; sourceTree = "<group>"; };
+		39BBBB59266F9BD7003D41EA /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,13 +119,13 @@
 		395594221E665C8F00B88153 /* PhotoBrowserDemo */ = {
 			isa = PBXGroup;
 			children = (
+				39BBBB55266F9BD7003D41EA /* 0.jpg */,
+				39BBBB59266F9BD7003D41EA /* 1.jpg */,
+				39BBBB52266F9BD7003D41EA /* 2.jpg */,
+				39BBBB53266F9BD7003D41EA /* 3.jpeg */,
+				39BBBB57266F9BD7003D41EA /* 4.jpeg */,
+				39BBBB56266F9BD7003D41EA /* 5.jpeg */,
 				395594681E665CD900B88153 /* Lib */,
-				395594561E665CC000B88153 /* 0.jpg */,
-				395594571E665CC000B88153 /* 1.jpg */,
-				395594581E665CC000B88153 /* 2.jpg */,
-				395594591E665CC000B88153 /* 3.jpg */,
-				3955945A1E665CC000B88153 /* 4.jpg */,
-				3955945B1E665CC000B88153 /* 5.png */,
 				395594261E665C8F00B88153 /* AppDelegate.h */,
 				395594271E665C8F00B88153 /* AppDelegate.m */,
 				395594291E665C8F00B88153 /* ViewController.h */,
@@ -168,8 +168,8 @@
 		395594681E665CD900B88153 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				395594621E665CD000B88153 /* FlyPhotoEnlargeToolView.h */,
-				395594631E665CD000B88153 /* FlyPhotoEnlargeToolView.m */,
+				39BBBB4F266F9BAF003D41EA /* FlyZoomView.h */,
+				39BBBB50266F9BAF003D41EA /* FlyZoomView.m */,
 				395594641E665CD000B88153 /* FlyPhotosBrowserView.h */,
 				395594651E665CD000B88153 /* FlyPhotosBrowserView.m */,
 			);
@@ -243,6 +243,7 @@
 				TargetAttributes = {
 					3955941F1E665C8F00B88153 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = SSS4ABYHYB;
 						ProvisioningStyle = Automatic;
 					};
 					395594381E665C9000B88153 = {
@@ -262,6 +263,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -282,15 +284,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				395594601E665CC000B88153 /* 4.jpg in Resources */,
-				3955945E1E665CC000B88153 /* 2.jpg in Resources */,
-				3955945C1E665CC000B88153 /* 0.jpg in Resources */,
+				39BBBB62266F9BD7003D41EA /* 1.jpg in Resources */,
+				39BBBB5C266F9BD7003D41EA /* 3.jpeg in Resources */,
 				395594331E665C8F00B88153 /* LaunchScreen.storyboard in Resources */,
 				395594301E665C8F00B88153 /* Assets.xcassets in Resources */,
+				39BBBB5E266F9BD7003D41EA /* 0.jpg in Resources */,
+				39BBBB5B266F9BD7003D41EA /* 2.jpg in Resources */,
 				3955942E1E665C8F00B88153 /* Main.storyboard in Resources */,
-				395594611E665CC000B88153 /* 5.png in Resources */,
-				3955945F1E665CC000B88153 /* 3.jpg in Resources */,
-				3955945D1E665CC000B88153 /* 1.jpg in Resources */,
+				39BBBB60266F9BD7003D41EA /* 4.jpeg in Resources */,
+				39BBBB5F266F9BD7003D41EA /* 5.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,7 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				395594661E665CD000B88153 /* FlyPhotoEnlargeToolView.m in Sources */,
+				39BBBB51266F9BAF003D41EA /* FlyZoomView.m in Sources */,
 				3955942B1E665C8F00B88153 /* ViewController.m in Sources */,
 				395594671E665CD000B88153 /* FlyPhotosBrowserView.m in Sources */,
 				395594281E665C8F00B88153 /* AppDelegate.m in Sources */,
@@ -466,6 +468,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SSS4ABYHYB;
 				INFOPLIST_FILE = PhotoBrowserDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.walg.www.PhotoBrowserDemo;
@@ -477,6 +480,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SSS4ABYHYB;
 				INFOPLIST_FILE = PhotoBrowserDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.walg.www.PhotoBrowserDemo;
@@ -549,6 +553,7 @@
 				3955944F1E665C9000B88153 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		395594501E665C9000B88153 /* Build configuration list for PBXNativeTarget "PhotoBrowserDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -557,6 +562,7 @@
 				395594521E665C9000B88153 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		395594531E665C9000B88153 /* Build configuration list for PBXNativeTarget "PhotoBrowserDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -565,6 +571,7 @@
 				395594551E665C9000B88153 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
