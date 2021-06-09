@@ -11,22 +11,26 @@
 @interface FlyZoomView ()<UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong, readwrite) UIScrollView *zoomScrollView;
-@property (nonatomic, strong, readwrite) UIImageView *imageView;
+@property (nonatomic, strong, readwrite) UIView *contentView;
 @property (nonatomic, assign) CGFloat defaultScale;
+
+@property (nonatomic, strong) UITapGestureRecognizer *singleGR;
+@property (nonatomic, strong) UITapGestureRecognizer *doubleGR;
+@property (nonatomic, strong) UILongPressGestureRecognizer *longGR;
 
 @end
 
 @implementation FlyZoomView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
+    
     self = [super initWithFrame:frame];
     if (self) {
         _minScale = 1.0;
         _maxScale = 4.0;
         _defaultScale = 1.0;
+        _gestureType = FlyZoomGestureType_ALL;
         [self addSubview:self.zoomScrollView];
-        [self.zoomScrollView addSubview:self.imageView];
     }
     return self;
 }
@@ -45,6 +49,16 @@
         _minScale = minScale;
         _defaultScale = minScale;
         self.zoomScrollView.minimumZoomScale = minScale;
+    }
+}
+
+- (void)setGestureType:(FlyZoomGestureType)gestureType {
+    
+    if (_gestureType != gestureType) {
+        _gestureType = gestureType;
+        _singleGR.enabled = gestureType & FlyZoomGestureType_SINGLE;
+        _doubleGR.enabled = gestureType & FlyZoomGestureType_DOUBLE;
+        _longGR.enabled = gestureType & FlyZoomGestureType_LONG;
     }
 }
 
@@ -88,18 +102,12 @@
         
         //单击依赖双击失败之后才响应
         [tapGR requireGestureRecognizerToFail:doubleTapGR];
+        
+        _singleGR = tapGR;
+        _doubleGR = doubleTapGR;
+        _longGR = pressLongGesture;
     }
     return _zoomScrollView;
-}
-
-- (UIImageView *)imageView {
-    
-    if (!_imageView) {
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _imageView.backgroundColor = [UIColor clearColor];
-        _imageView.contentMode = UIViewContentModeScaleToFill;
-    }
-    return _imageView;
 }
 
 #pragma mark - Zoom Delegate
@@ -112,15 +120,13 @@
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return self.imageView;
+    
+    return self.contentView;
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     
-    CGFloat offsetX = (scrollView.bounds.size.width > scrollView.contentSize.width)?(scrollView.bounds.size.width - scrollView.contentSize.width)/2 : 0.0;
-    CGFloat offsetY = (scrollView.bounds.size.height > scrollView.contentSize.height)?(scrollView.bounds.size.height - scrollView.contentSize.height)/2 : 0.0;
-    self.imageView.center = CGPointMake(scrollView.contentSize.width/2 + offsetX,scrollView.contentSize.height/2 + offsetY);
-    
+    [self resetContentViewCenter];
     if ([self.delegate respondsToSelector:@selector(zoomViewDidZoom:)]) {
         [self.delegate zoomViewDidZoom:self];
     }
@@ -134,9 +140,9 @@
 }
 
 #pragma mark - GestureRecognizer Delegate
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    if (touch.view == self.imageView || touch.view == self.zoomScrollView) {
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    if (touch.view == self.contentView || touch.view == self.zoomScrollView) {
         return YES;
     }
     return NO;
@@ -159,7 +165,7 @@
 
 - (void)onDoubleTap:(UITapGestureRecognizer *)gesture {
     
-    CGPoint touchPoint = [gesture locationInView:self.imageView];
+    CGPoint touchPoint = [gesture locationInView:self.contentView];
     if (touchPoint.x < 0 || touchPoint.y < 0) {
         return;
     }
@@ -179,8 +185,8 @@
         CGSize zoomSize = self.zoomScrollView.bounds.size;
         zoomSize.width = zoomSize.width / currentScale;
         zoomSize.height = zoomSize.height / currentScale;
-        CGFloat zoomX = touchPoint.x - zoomSize.width * 0.5 - self.imageView.frame.origin.x/currentScale;
-        CGFloat zoomY = touchPoint.y - zoomSize.height * 0.5 - self.imageView.frame.origin.y/currentScale;
+        CGFloat zoomX = touchPoint.x - zoomSize.width * 0.5 - self.contentView.frame.origin.x/currentScale;
+        CGFloat zoomY = touchPoint.y - zoomSize.height * 0.5 - self.contentView.frame.origin.y/currentScale;
         CGRect zoomRect = CGRectMake(zoomX, zoomY, zoomSize.width, zoomSize.height);
         [self.zoomScrollView zoomToRect:zoomRect animated:YES];
     }
@@ -197,44 +203,63 @@
     }
 }
 
-#pragma mark - Update Image
-- (void)updateImage:(UIImage *)image {
+#pragma mark - Update Content
+- (void)updateContentView:(UIView *)contentView {
     
-    [self.imageView setImage:image];
-    [self resetImageViewFrame];
+    if (self.contentView) {
+        [self.contentView removeFromSuperview];
+    }
+    if (![contentView isKindOfClass:[UIView class]]) {
+        return;
+    }
+    if (contentView.superview) {
+        [contentView removeFromSuperview];
+    }
+    self.contentView = contentView;
+    [self.zoomScrollView addSubview:self.contentView];
     [self resetScrollView];
+    [self resetContentViewCenter];
 }
 
-- (void)resetImageViewFrame {
+- (void)resetContentViewFrame:(UIView *)contentView {
     
-    CGFloat contentW = self.zoomScrollView.bounds.size.width;
-    CGFloat contentH = self.zoomScrollView.bounds.size.height;
+    CGFloat scrollW = self.zoomScrollView.bounds.size.width;
+    CGFloat scrollH = self.zoomScrollView.bounds.size.height;
     
-    CGFloat imageW = self.imageView.image.size.width;
-    CGFloat imageH = self.imageView.image.size.height;
+    CGFloat contentW = contentView.frame.size.width;
+    CGFloat contentH = contentView.frame.size.height;
     
-    imageW = imageW == 0 ? contentW : imageW;
-    imageH = imageH == 0 ? contentH : imageH;
+    contentW = contentW == 0 ? scrollW : contentW;
+    contentH = contentH == 0 ? scrollH : contentH;
     
     CGRect rect = CGRectZero;
     
-    rect.size.width = contentW;
-    rect.size.height = imageH * contentW/imageW;
+    rect.size.width = scrollW;
+    rect.size.height = contentH * scrollW/contentW;
     
-    if (rect.size.width < contentW) {
-        rect.origin.x = 0.5 * (contentW - rect.size.width);
+    if (rect.size.width < scrollW) {
+        rect.origin.x = 0.5 * (scrollW - rect.size.width);
     }
-    if (rect.size.height < contentH) {
-        rect.origin.y = 0.5 * (contentH - rect.size.height);
+    if (rect.size.height < scrollH) {
+        rect.origin.y = 0.5 * (scrollH - rect.size.height);
     }
-    [self.imageView setFrame:rect];
+    [contentView setFrame:rect];
 }
 
 - (void)resetScrollView {
     
-    CGSize contentSize = self.imageView.bounds.size;
+    CGSize contentSize = self.contentView.bounds.size;
     [self.zoomScrollView setContentSize:contentSize];
     [self.zoomScrollView setContentOffset:CGPointZero];
+}
+
+- (void)resetContentViewCenter {
+    
+    CGSize contentSize = self.zoomScrollView.contentSize;
+    CGSize boundSize = self.zoomScrollView.bounds.size;
+    CGFloat offsetX = (boundSize.width > contentSize.width)?(boundSize.width - contentSize.width)/2 : 0.0;
+    CGFloat offsetY = (boundSize.height > contentSize.height)?(boundSize.height - contentSize.height)/2 : 0.0;
+    self.contentView.center = CGPointMake(contentSize.width/2 + offsetX, contentSize.height/2 + offsetY);
 }
 
 @end

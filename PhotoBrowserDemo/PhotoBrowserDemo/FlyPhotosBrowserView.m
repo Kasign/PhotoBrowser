@@ -110,12 +110,14 @@
     _bottomScrollView.delegate = self;
     
     for (int i = 0; i<_imageArray.count; i++) {
-        FlyZoomView *imgView = [[FlyZoomView alloc]initWithFrame:CGRectMake(FLY_SCREEN_WIDTH*i, 0, FLY_SCREEN_WIDTH, FLY_SCREEN_HEIGHT)];
-        imgView.delegate = self;
-        imgView.backgroundColor = [UIColor clearColor];
+        FlyZoomView *zoomView = [[FlyZoomView alloc]initWithFrame:CGRectMake(FLY_SCREEN_WIDTH*i, 0, FLY_SCREEN_WIDTH, FLY_SCREEN_HEIGHT)];
+        zoomView.delegate = self;
+        zoomView.backgroundColor = [UIColor clearColor];
         UIImage * image = _imageArray[i];
-        [imgView updateImage:image];
-        [_bottomScrollView addSubview:imgView];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        [zoomView resetContentViewFrame:imageView];
+        [zoomView updateContentView:imageView];
+        [_bottomScrollView addSubview:zoomView];
     }
     
     _bottomScrollView.contentSize = CGSizeMake(_imageArray.count*(FLY_SCREEN_WIDTH), FLY_SCREEN_HEIGHT);
